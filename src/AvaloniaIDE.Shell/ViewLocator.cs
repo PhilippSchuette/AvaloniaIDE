@@ -5,7 +5,9 @@ using AvaloniaIDE.Shell.ViewModels;
 
 namespace AvaloniaIDE.Shell;
 
-public class ViewLocator : IDataTemplate
+#pragma warning disable CA1812
+internal sealed class ViewLocator : IDataTemplate
+#pragma warning restore
 {
 
     public Control? Build(object? param)
@@ -17,15 +19,10 @@ public class ViewLocator : IDataTemplate
         var type = Type.GetType(name);
 
         if (type != null)
-        {
             return (Control)Activator.CreateInstance(type)!;
-        }
         
         return new TextBlock { Text = "Not Found: " + name };
     }
 
-    public bool Match(object? data)
-    {
-        return data is ViewModelBase;
-    }
+    public bool Match(object? data) => data is ViewModelBase;
 }

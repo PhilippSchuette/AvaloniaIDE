@@ -2,6 +2,4 @@
 
 namespace AvaloniaIDE.Shell.ViewModels;
 
-public class ViewModelBase : ObservableObject
-{
-}
+internal class ViewModelBase : ObservableObject;
