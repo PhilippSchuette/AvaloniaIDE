@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyName>AvaloniaIDE</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

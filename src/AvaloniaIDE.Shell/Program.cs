@@ -28,7 +28,7 @@ internal sealed class Program
         hostBuilder.Environment.ContentRootPath = Directory.GetCurrentDirectory();
 
         hostBuilder.Configuration
-            //.AddJsonFile("shellsettings.json");
+            .AddJsonFile("shellsettings.json")
             .AddJsonFile($"shellsettings.{hostBuilder.Environment.EnvironmentName}.json");
 
         string basePath = Environment.GetFolderPath(
@@ -73,7 +73,7 @@ internal sealed class Program
 
         var logger = host.Services.GetRequiredService<MsLogging.ILogger<Program>>();
 
-        logger.LogShellStart();
+        logger.LogShellStarting(hostBuilder.Environment.ApplicationName);
         using var cancellationTokenSource = new CancellationTokenSource();
         var cancellationToken = cancellationTokenSource.Token;
         await host.StartAsync(cancellationToken).ConfigureAwait(false);
@@ -82,6 +82,7 @@ internal sealed class Program
 
         try
         {
+            logger.LogAvaloniaStarting();
             result = lifetime.Start();
             logger.LogAvaloniaStopped();
         }
@@ -95,7 +96,7 @@ internal sealed class Program
 
         await host.StopAsync(cancellationToken).ConfigureAwait(false);
 
-        logger.LogShellStopped();
+        logger.LogShellStopped(hostBuilder.Environment.ApplicationName);
 
         return result;
     }
