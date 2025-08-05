@@ -1,0 +1,10 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Override": {
+        "Microsoft": "Error",
+        "System": "Error"
+      }
+    }
+  }
+}

@@ -2,25 +2,34 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Avalonia.Controls.ApplicationLifetimes;
 using Serilog;
 
+using MsLogging = Microsoft.Extensions.Logging;
+
 namespace AvaloniaIDE.Shell;
 
 internal sealed class Program
 {
+    private const string LogTemplate = """
+        [{Timestamp:yyyy-MM-dd HH:mm:ss.fff}][{Level:u3}][{SourceContext}] {Message:lj}{NewLine}{Exception}
+        """;
+
     [STAThread]
     public static async Task<int> Main(string[] args)
     {
         HostApplicationBuilder hostBuilder = Host.CreateApplicationBuilder(args);
 
-        hostBuilder.Configuration
-            .AddJsonFile("shellsettings.json");
+        hostBuilder.Environment.ContentRootPath = Directory.GetCurrentDirectory();
 
-        hostBuilder.Environment.EnvironmentName = "Development";
+        hostBuilder.Configuration
+            //.AddJsonFile("shellsettings.json");
+            .AddJsonFile($"shellsettings.{hostBuilder.Environment.EnvironmentName}.json");
 
         string basePath = Environment.GetFolderPath(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ?
@@ -38,7 +47,8 @@ internal sealed class Program
                 logFilePath,
                 fileSizeLimitBytes: 128 * 1024 * 1024,
                 rollOnFileSizeLimit: true,
-                retainedFileCountLimit: 2
+                retainedFileCountLimit: 2,
+                outputTemplate: LogTemplate
             )
         );
 #pragma warning restore
@@ -61,23 +71,31 @@ internal sealed class Program
         IHost host = hostBuilder.Build();
         Application app = appBuilder.Instance!;
 
-        await host.StartAsync().ConfigureAwait(false);
+        var logger = host.Services.GetRequiredService<MsLogging.ILogger<Program>>();
+
+        logger.LogShellStart();
+        using var cancellationTokenSource = new CancellationTokenSource();
+        var cancellationToken = cancellationTokenSource.Token;
+        await host.StartAsync(cancellationToken).ConfigureAwait(false);
 
         int result = 0;
+
         try
         {
             result = lifetime.Start();
+            logger.LogAvaloniaStopped();
         }
 #pragma warning disable CA1031
-        catch (Exception)
+        catch (Exception ex)
 #pragma warning restore
         {
-            // TODO: add logging
+            logger.LogAvaloniaStopped(ex);
             result = -1;
         }
 
-        await host.StopAsync().ConfigureAwait(false);
-        await host.WaitForShutdownAsync().ConfigureAwait(false);
+        await host.StopAsync(cancellationToken).ConfigureAwait(false);
+
+        logger.LogShellStopped();
 
         return result;
     }

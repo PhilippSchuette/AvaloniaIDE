@@ -1,0 +1,5 @@
+# we enforce Unix line endings
+* text eol=lf
+
+# recognize the following files as binary artifacts
+*.ico binary
