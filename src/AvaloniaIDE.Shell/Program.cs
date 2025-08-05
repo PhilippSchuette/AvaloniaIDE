@@ -62,13 +62,15 @@ internal sealed class Program
         AppBuilder appBuilder = AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
-            .LogToTrace(Avalonia.Logging.LogEventLevel.Verbose)
             .SetupWithLifetime(lifetime);
 
-        // TODO: use a custom log sink
-        // Avalonia.Logging.Logger.Sink = null;
-
         IHost host = hostBuilder.Build();
+
+        Avalonia.Logging.Logger.Sink = new ILoggerLogSink(
+            host.Services.GetRequiredService<MsLogging.ILogger<ILoggerLogSink>>(),
+            [],
+            MsLogging.LogLevel.Warning
+        );
         Application app = appBuilder.Instance!;
 
         var logger = host.Services.GetRequiredService<MsLogging.ILogger<Program>>();

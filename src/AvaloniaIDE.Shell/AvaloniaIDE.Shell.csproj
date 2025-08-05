@@ -5,6 +5,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     <AssemblyName>AvaloniaIDE</AssemblyName>
+    <RootNamespace>AvaloniaIDE.Shell</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
