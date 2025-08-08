@@ -24,15 +24,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="../shellsettings.json"
+        <Content Include="../Configuration/shellsettings.json"
                  Link="Configuration/shellsettings.json"
                  CopyToOutputDirectory="PreserveNewest"/>
         <Content Condition="'$(Configuration)' == 'Debug'"
-                 Include="../shellsettings.Development.json"
+                 Include="../Configuration/shellsettings.Development.json"
                  Link="Configuration/shellsettings.Development.json"
                  CopyToOutputDirectory="PreserveNewest"/>
         <Content Condition="'$(Configuration)' == 'Release'"
-                 Include="../shellsettings.Production.json"
+                 Include="../Configuration/shellsettings.Production.json"
                  Link="Configuration/shellsettings.Production.json"
                  CopyToOutputDirectory="PreserveNewest"/>
     </ItemGroup>
