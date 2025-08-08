@@ -3,6 +3,7 @@ using AvaloniaIDE.Shell.UI;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Reflection;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Configuration;
@@ -53,9 +54,13 @@ internal sealed class ShellStartingState : ShellStateBase
 
     private void PrepareHostConfiguration()
     {
+        var basePath =
+            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "Configuration");
         this.hostBuilder.Configuration
-            .AddJsonFile("Configuration/shellsettings.json")
-            .AddJsonFile($"Configuration/shellsettings.{hostBuilder.Environment.EnvironmentName}.json");
+            .AddJsonFile(
+                Path.Combine(basePath, "shellsettings.json"))
+            .AddJsonFile(
+                Path.Combine(basePath, $"shellsettings.{hostBuilder.Environment.EnvironmentName}.json"));
     }
 
 #pragma warning disable CA1305

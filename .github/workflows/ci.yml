@@ -23,3 +23,9 @@ jobs:
       - name: List files in the repo
         run: |
           ls ${{ github.workspace }}
+      - name: Setup dotnet ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Build AvaloniaIDE.sln
+        run: dotnet build src/AvaloniaIDE.sln
