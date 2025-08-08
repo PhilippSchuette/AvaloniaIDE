@@ -27,8 +27,8 @@ internal sealed class ShellStartingState : ShellStateBase
 
     protected override Task OnTransitioningAsync()
     {
-        this.PrepareHostEnvironment();
         this.PrepareHostConfiguration();
+        this.PrepareHostEnvironment();
         this.PrepareHostLogging();
 
         return Task.CompletedTask;

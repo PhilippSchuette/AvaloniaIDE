@@ -2,6 +2,7 @@ using AvaloniaIDE.Shell.State;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 
@@ -44,7 +45,9 @@ public sealed class AvaloniaStartingState : ShellStateBase
 
     protected override IShellState GetNextState()
     {
-        var nextState = new ShellStartedState(this.appBuilder!, this.host);
+        var logger =
+            this.host.Services.GetRequiredService<Microsoft.Extensions.Logging.ILogger<ShellStartedState>>();
+        var nextState = new ShellStartedState(this.appBuilder!, this.host, logger);
 
         return nextState;
     }

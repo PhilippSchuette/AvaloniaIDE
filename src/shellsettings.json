@@ -3,5 +3,8 @@
     "MinimumLevel": {
       "Default": "Verbose"
     }
+  },
+  "Environment": {
+    "ApplicationName": "AvaloniaIDE Shell"
   }
 }
