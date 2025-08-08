@@ -1,17 +1,17 @@
-namespace AvaloniaIDE.Shell;
-
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-internal sealed class ILoggerLogSink : Avalonia.Logging.ILogSink
+namespace AvaloniaIDE.Shell.UI;
+
+internal sealed class LogSink : Avalonia.Logging.ILogSink
 {
     private readonly ILogger logger;
     private readonly ReadOnlySet<string>? areas;
     private readonly LogLevel minLevel;
 
-    public ILoggerLogSink(
-        ILogger<ILoggerLogSink> logger,
+    public LogSink(
+        ILogger logger,
         string[]? areas,
         LogLevel minLevel)
     {

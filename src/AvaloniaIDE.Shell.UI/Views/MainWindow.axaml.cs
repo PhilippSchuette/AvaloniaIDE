@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace AvaloniaIDE.Shell.Views;
+namespace AvaloniaIDE.Shell.UI.Views;
 
 internal sealed partial class MainWindow : Window
 {

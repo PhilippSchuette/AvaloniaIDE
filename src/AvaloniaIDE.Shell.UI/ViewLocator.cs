@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using AvaloniaIDE.Shell.ViewModels;
+using AvaloniaIDE.Shell.UI.ViewModels;
 
-namespace AvaloniaIDE.Shell;
+namespace AvaloniaIDE.Shell.UI;
 
 #pragma warning disable CA1812
 internal sealed class ViewLocator : IDataTemplate

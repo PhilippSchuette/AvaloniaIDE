@@ -3,10 +3,10 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
-using AvaloniaIDE.Shell.ViewModels;
-using AvaloniaIDE.Shell.Views;
+using AvaloniaIDE.Shell.UI.ViewModels;
+using AvaloniaIDE.Shell.UI.Views;
 
-namespace AvaloniaIDE.Shell;
+namespace AvaloniaIDE.Shell.UI;
 
 internal sealed partial class App : Application
 {

@@ -1,4 +1,4 @@
-﻿namespace AvaloniaIDE.Shell.ViewModels;
+﻿namespace AvaloniaIDE.Shell.UI.ViewModels;
 
 internal sealed partial class MainWindowViewModel : ViewModelBase
 {

@@ -6,11 +6,11 @@ namespace AvaloniaIDE.Shell;
 internal static partial class Logs
 {
     [LoggerMessage(
-        EventId = 0, Level = LogLevel.Information, Message = "--- {ApplicationName} shell starting ---")]
+        EventId = 0, Level = LogLevel.Information, Message = "--- {ApplicationName} starting ---")]
     public static partial void LogShellStarting(this ILogger logger, string applicationName);
 
     [LoggerMessage(
-        EventId = 0, Level = LogLevel.Information, Message = "--- {ApplicationName} shell stopped ---")]
+        EventId = 0, Level = LogLevel.Information, Message = "--- {ApplicationName} stopped ---")]
     public static partial void LogShellStopped(this ILogger logger, string applicationName);
 
     [LoggerMessage(
