@@ -7,10 +7,12 @@ using Avalonia.Controls.ApplicationLifetimes;
 
 namespace AvaloniaIDE.Shell.UI;
 
-public sealed class AvaloniaStartingState : IShellState
+public sealed class AvaloniaStartingState : ShellStateBase
 {
     private readonly IHost host;
     private readonly Microsoft.Extensions.Logging.ILogger logger;
+
+    private AppBuilder? appBuilder;
 
     public AvaloniaStartingState(
         IHost host,
@@ -20,11 +22,7 @@ public sealed class AvaloniaStartingState : IShellState
         this.logger = logger;
     }
 
-    public bool IsInitial => false;
-
-    public bool IsFinal => false;
-
-    public Task<IShellState> TransitionAsync()
+    protected override Task OnTransitioningAsync()
     {
         using var lifetime = new ClassicDesktopStyleApplicationLifetime()
         {
@@ -32,7 +30,7 @@ public sealed class AvaloniaStartingState : IShellState
             ShutdownMode = Avalonia.Controls.ShutdownMode.OnMainWindowClose,
         };
 
-        AppBuilder appBuilder = AppBuilder.Configure<App>()
+        this.appBuilder = AppBuilder.Configure<App>()
             .UsePlatformDetect()
             .WithInterFont()
             .SetupWithLifetime(lifetime);
@@ -41,9 +39,13 @@ public sealed class AvaloniaStartingState : IShellState
             logger, [], Microsoft.Extensions.Logging.LogLevel.Warning
         );
 
-        // TODO: return AvaloniaConfiguredState instead using activator utilities
-        var nextState = new ApplicationStoppedState();
+        return Task.CompletedTask;
+    }
 
-        return Task.FromResult<IShellState>(nextState);
+    protected override IShellState GetNextState()
+    {
+        var nextState = new ShellStartedState(this.appBuilder!, this.host);
+
+        return nextState;
     }
 }
