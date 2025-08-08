@@ -1,26 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyName>AvaloniaIDE.Shell</AssemblyName>
-    <RootNamespace>AvaloniaIDE.Shell</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <AssemblyName>AvaloniaIDE.Shell</AssemblyName>
+        <RootNamespace>AvaloniaIDE.Shell</RootNamespace>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Serilog.Extensions.Hosting" />
-    <PackageReference Include="Serilog.Settings.Configuration" />
-    <PackageReference Include="Serilog.Sinks.File" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Serilog.Extensions.Hosting"/>
+        <PackageReference Include="Serilog.Settings.Configuration"/>
+        <PackageReference Include="Serilog.Sinks.File"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AvaloniaIDE.Shell.State\AvaloniaIDE.Shell.State.csproj" />
-    <ProjectReference Include="..\AvaloniaIDE.Shell.UI\AvaloniaIDE.Shell.UI.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\AvaloniaIDE.Shell.State\AvaloniaIDE.Shell.State.csproj"/>
+        <ProjectReference Include="..\AvaloniaIDE.Shell.UI\AvaloniaIDE.Shell.UI.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="../shellsettings.json"
+                 Link="Configuration/shellsettings.json"
+                 CopyToOutputDirectory="PreserveNewest"/>
+        <Content Condition="'$(Configuration)' == 'Debug'"
+                 Include="../shellsettings.Development.json"
+                 Link="Configuration/shellsettings.Development.json"
+                 CopyToOutputDirectory="PreserveNewest"/>
+        <Content Condition="'$(Configuration)' == 'Release'"
+                 Include="../shellsettings.Production.json"
+                 Link="Configuration/shellsettings.Production.json"
+                 CopyToOutputDirectory="PreserveNewest"/>
+    </ItemGroup>
 
 </Project>

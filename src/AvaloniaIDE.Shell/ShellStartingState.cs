@@ -54,8 +54,8 @@ internal sealed class ShellStartingState : ShellStateBase
     private void PrepareHostConfiguration()
     {
         this.hostBuilder.Configuration
-            .AddJsonFile("shellsettings.json")
-            .AddJsonFile($"shellsettings.{hostBuilder.Environment.EnvironmentName}.json");
+            .AddJsonFile("Configuration/shellsettings.json")
+            .AddJsonFile($"Configuration/shellsettings.{hostBuilder.Environment.EnvironmentName}.json");
     }
 
 #pragma warning disable CA1305
