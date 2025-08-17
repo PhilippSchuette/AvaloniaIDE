@@ -37,7 +37,6 @@ internal sealed class ShellStartingState : ShellStateBase
 
     protected override IShellState GetNextState()
     {
-
         IHost host = this.hostBuilder.Build();
         Microsoft.Extensions.Logging.ILogger<AvaloniaStartingState> logger =
             host.Services.GetRequiredService<Microsoft.Extensions.Logging.ILogger<AvaloniaStartingState>>();

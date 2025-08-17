@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using AvaloniaIDE.Shell.State;
 
 namespace AvaloniaIDE.Shell;
@@ -12,15 +13,11 @@ internal sealed class Program
         var initialState = new ShellStartingState();
         IShellState currentState = initialState;
 
-        // next state is AvaloniaStartingState
-        currentState = await currentState.TransitionAsync().ConfigureAwait(false);
+        // basic loop should suffice for now.
+        // we might need some more complex handling later on, based on specific interfaces implementied by states.
+        while (!currentState.IsFinal)
+            currentState = await currentState.TransitionAsync().ConfigureAwait(false);
 
-        // next state is ShellStartedState
-        currentState = await currentState.TransitionAsync().ConfigureAwait(false);
-
-        // next state is ApplicationStoppedState
-        currentState = await currentState.TransitionAsync().ConfigureAwait(false);
-        
         return 0;
     }
 }
