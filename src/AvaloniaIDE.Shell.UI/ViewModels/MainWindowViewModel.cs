@@ -2,5 +2,5 @@
 
 internal sealed partial class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    public string DockingPlaceholderMessage { get; } = "Docking goes here.";
 }

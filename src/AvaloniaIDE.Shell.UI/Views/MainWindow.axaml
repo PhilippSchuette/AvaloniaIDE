@@ -10,9 +10,22 @@
         Title="AvaloniaIDE.Shell">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
+    <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Menu Background="DimGray" DockPanel.Dock="Top">
+            <MenuItem Header="File"></MenuItem>
+            <MenuItem Header="Placeholder 1"></MenuItem>
+            <MenuItem Header="Placeholder 2"></MenuItem>
+        </Menu>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ItemsControl DockPanel.Dock="Bottom" Height="24" Background="DimGray"></ItemsControl>
+
+        <!-- This will fill the remaining area of the DockPanel. -->
+        <Panel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock Text="{Binding DockingPlaceholderMessage}" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+        </Panel>
+    </DockPanel>
 
 </Window>
