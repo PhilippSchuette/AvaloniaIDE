@@ -42,7 +42,7 @@ internal sealed class ShellStartedState : ShellStateBase
         {
              logger.LogAvaloniaStarting();
              if (app.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime lifetime)
-             result = lifetime.Start();
+                result = lifetime.Start();
              logger.LogAvaloniaStopped();
          }
 #pragma warning disable CA1031

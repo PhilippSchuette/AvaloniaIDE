@@ -17,7 +17,7 @@ public sealed class AvaloniaStartingState : ShellStateBase
 
     public AvaloniaStartingState(
         IHost host,
-        Microsoft.Extensions.Logging.ILogger<AvaloniaStartingState> logger)
+        Microsoft.Extensions.Logging.ILogger<IShellState> logger)
     {
         this.host = host;
         this.logger = logger;

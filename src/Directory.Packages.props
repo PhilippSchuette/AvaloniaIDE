@@ -9,11 +9,20 @@
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.3.2" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="11.3.2" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageVersion Include="Google.Protobuf" Version="3.32.0" />
+    <PackageVersion Include="Grpc.Net.Client" Version="2.71.0" />
+    <PackageVersion Include="Grpc.Tools" Version="2.72.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.64.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Serilog.Extensions.Hosting" Version="9.0.0" />

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -8,29 +8,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Serilog.Extensions.Hosting"/>
-        <PackageReference Include="Serilog.Settings.Configuration"/>
-        <PackageReference Include="Serilog.Sinks.File"/>
+        <PackageReference Include="Serilog.Extensions.Hosting" />
+        <PackageReference Include="Serilog.Settings.Configuration" />
+        <PackageReference Include="Serilog.Sinks.File" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AvaloniaIDE.Shell.State\AvaloniaIDE.Shell.State.csproj"/>
-        <ProjectReference Include="..\AvaloniaIDE.Shell.UI\AvaloniaIDE.Shell.UI.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="Configuration/shellsettings.json" CopyToOutputDirectory="PreserveNewest"/>
-        <Content Condition="'$(Configuration)' == 'Debug'"
-                 Include="Configuration/shellsettings.Development.json"
-                 CopyToOutputDirectory="PreserveNewest"/>
-        <Content Condition="'$(Configuration)' == 'Release'"
-                 Include="Configuration/shellsettings.Production.json"
-                 CopyToOutputDirectory="PreserveNewest"/>
+        <ProjectReference Include="..\AvaloniaIDE.Shell.State\AvaloniaIDE.Shell.State.csproj" />
+        <ProjectReference Include="..\AvaloniaIDE.Shell.Hosting\AvaloniaIDE.Shell.Hosting.csproj" />
     </ItemGroup>
 
 </Project>
