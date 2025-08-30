@@ -1,13 +1,12 @@
 using AvaloniaIDE.Shell.State;
-using AvaloniaIDE.Shell.UI;
+using AvaloniaIDE.Shell.Hosting;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.Reflection;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using Serilog;
 
 namespace AvaloniaIDE.Shell;
@@ -18,12 +17,12 @@ internal sealed class ShellStartingState : ShellStateBase
         [{Timestamp:yyyy-MM-dd HH:mm:ss.fff}][{Level:u3}][{SourceContext}] {Message:lj}{NewLine}{Exception}
         """;
 
-    private readonly HostApplicationBuilder hostBuilder;
+    private readonly WebApplicationBuilder builder;
 
     public ShellStartingState()
     {
         var args = Environment.GetCommandLineArgs();
-        this.hostBuilder = Host.CreateApplicationBuilder(args);
+        this.builder = WebApplication.CreateBuilder();
     }
 
     protected override Task OnTransitioningAsync()
@@ -37,36 +36,32 @@ internal sealed class ShellStartingState : ShellStateBase
 
     protected override IShellState GetNextState()
     {
-        IHost host = this.hostBuilder.Build();
-        Microsoft.Extensions.Logging.ILogger<AvaloniaStartingState> logger =
-            host.Services.GetRequiredService<Microsoft.Extensions.Logging.ILogger<AvaloniaStartingState>>();
-
-        return new AvaloniaStartingState(host, logger);
+        return new HostingStartingState(this.builder);
     }
 
     public override bool IsInitial => true;
 
     private void PrepareHostEnvironment()
     {
-        this.hostBuilder.Environment.ContentRootPath = Directory.GetCurrentDirectory();
+        this.builder.Environment.ContentRootPath = Directory.GetCurrentDirectory();
     }
 
     private void PrepareHostConfiguration()
     {
         var basePath =
             Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "Configuration");
-        this.hostBuilder.Configuration
+        this.builder.Configuration
             .AddJsonFile(
                 Path.Combine(basePath, "shellsettings.json"))
             .AddJsonFile(
-                Path.Combine(basePath, $"shellsettings.{hostBuilder.Environment.EnvironmentName}.json"));
+                Path.Combine(basePath, $"shellsettings.{builder.Environment.EnvironmentName}.json"));
     }
 
 #pragma warning disable CA1305
     private void PrepareHostLogging()
     {
-        hostBuilder.Services.AddSerilog((services, config) => config
-            .ReadFrom.Configuration(hostBuilder.Configuration)
+        builder.Services.AddSerilog((services, config) => config
+            .ReadFrom.Configuration(builder.Configuration)
             .Enrich.FromLogContext()
             .WriteTo.File(
                 GetLogFilePath(),

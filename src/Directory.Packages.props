@@ -16,6 +16,9 @@
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
   </ItemGroup>
   <ItemGroup>
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.64.0" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageVersion Include="Serilog.Extensions.Hosting" Version="9.0.0" />
     <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />

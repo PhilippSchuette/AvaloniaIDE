@@ -5,10 +5,10 @@ using AvaloniaIDE.Shell.State;
 
 namespace AvaloniaIDE.Shell;
 
-internal sealed class Program
+internal static class Program
 {
     [STAThread]
-    public static async Task<int> Main(string[] args)
+    public static async Task<int> Main()
     {
         var initialState = new ShellStartingState();
         IShellState currentState = initialState;
