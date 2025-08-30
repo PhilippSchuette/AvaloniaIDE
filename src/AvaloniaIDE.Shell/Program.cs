@@ -13,8 +13,9 @@ internal static class Program
         var initialState = new ShellStartingState();
         IShellState currentState = initialState;
 
-        // basic loop should suffice for now.
-        // we might need some more complex handling later on, based on specific interfaces implementied by states.
+        // A basic loop should suffice for now.
+        // We might need some more complex handling later on,
+        // based on specific interfaces implemented by states.
         while (!currentState.IsFinal)
             currentState = await currentState.TransitionAsync().ConfigureAwait(false);
 

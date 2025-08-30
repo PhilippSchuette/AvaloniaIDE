@@ -4,6 +4,7 @@
     "default": {
       "commandName": "Project",
       "workingDirectory": "$(ProjectDir)/bin/$(Configuration)/$(TargetFramework)/",
+      "applicationUrl": "https://localhost:7043",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }
@@ -11,6 +12,7 @@
     "production": {
       "commandName": "Project",
       "workingDirectory": "$(ProjectDir)/bin/$(Configuration)/$(TargetFramework)/",
+      "applicationUrl": "https://localhost:7043",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Production"
       }
