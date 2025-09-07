@@ -1,13 +1,12 @@
-using AvaloniaIDE.Shell.State;
-using AvaloniaIDE.Shell.UI;
-using AvaloniaIDE.Shell.Hosting.Services;
+using AvaloniaIDE.Shell.Abstractions;
+using AvaloniaIDE.Shell.Hosting;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
-namespace AvaloniaIDE.Shell.Hosting;
+namespace AvaloniaIDE.Shell.States;
 
-public sealed class HostingStartingState : ShellStateBase
+internal sealed class HostingStartingState : ShellStateBase
 {
     private readonly WebApplicationBuilder builder;
 
@@ -18,7 +17,7 @@ public sealed class HostingStartingState : ShellStateBase
 
     protected override Task OnTransitioningAsync()
     {
-        this.builder.Services.AddGrpc();
+        this.builder.Services.ConfigureGrpc();
 
         return Task.CompletedTask;
     }
@@ -29,8 +28,7 @@ public sealed class HostingStartingState : ShellStateBase
         Microsoft.Extensions.Logging.ILogger<IShellState> logger =
             app.Services.GetRequiredService<Microsoft.Extensions.Logging.ILogger<IShellState>>();
 
-        // TODO: this needs to be moved, once dynamic modules have been implemented
-        app.MapGrpcService<GreeterService>();
+        app.MapGrpcServices();
 
         return new AvaloniaStartingState(app, logger);
     }

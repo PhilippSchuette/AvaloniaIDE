@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace AvaloniaIDE.Shell.UI;
+namespace AvaloniaIDE.Shell.States.Logging;
 
 internal static partial class Logs
 {

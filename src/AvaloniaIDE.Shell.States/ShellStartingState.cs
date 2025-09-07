@@ -1,4 +1,4 @@
-using AvaloniaIDE.Shell.State;
+using AvaloniaIDE.Shell.Abstractions;
 using AvaloniaIDE.Shell.Hosting;
 using System.Threading.Tasks;
 using System;
@@ -9,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Serilog;
 
-namespace AvaloniaIDE.Shell;
+namespace AvaloniaIDE.Shell.States;
 
-internal sealed class ShellStartingState : ShellStateBase
+public sealed class ShellStartingState : ShellStateBase
 {
     private const string LogTemplate = """
         [{Timestamp:yyyy-MM-dd HH:mm:ss.fff}][{Level:u3}][{SourceContext}] {Message:lj}{NewLine}{Exception}
@@ -22,7 +22,7 @@ internal sealed class ShellStartingState : ShellStateBase
     public ShellStartingState()
     {
         var args = Environment.GetCommandLineArgs();
-        this.builder = WebApplication.CreateBuilder();
+        this.builder = WebApplication.CreateBuilder(args);
     }
 
     protected override Task OnTransitioningAsync()

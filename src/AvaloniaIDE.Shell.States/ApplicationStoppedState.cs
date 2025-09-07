@@ -1,9 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using AvaloniaIDE.Shell.Abstractions;
 
-namespace AvaloniaIDE.Shell.State;
+namespace AvaloniaIDE.Shell.States;
 
-public sealed class ApplicationStoppedState : IShellState
+internal sealed class ApplicationStoppedState : IShellState
 {
     public bool IsInitial => false;
 

@@ -14,9 +14,4 @@
     <PackageReference Include="Grpc.AspNetCore" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AvaloniaIDE.Shell.State\AvaloniaIDE.Shell.State.csproj" />
-    <ProjectReference Include="..\AvaloniaIDE.Shell.UI\AvaloniaIDE.Shell.UI.csproj" />
-  </ItemGroup>
-
 </Project>

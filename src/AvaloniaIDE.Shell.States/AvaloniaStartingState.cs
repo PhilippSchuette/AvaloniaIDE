@@ -1,4 +1,5 @@
-using AvaloniaIDE.Shell.State;
+using AvaloniaIDE.Shell.Abstractions;
+using AvaloniaIDE.Shell.UI;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -6,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 
-namespace AvaloniaIDE.Shell.UI;
+namespace AvaloniaIDE.Shell.States;
 
-public sealed class AvaloniaStartingState : ShellStateBase
+internal sealed class AvaloniaStartingState : ShellStateBase
 {
     private readonly IHost host;
     private readonly Microsoft.Extensions.Logging.ILogger logger;
@@ -31,14 +32,8 @@ public sealed class AvaloniaStartingState : ShellStateBase
             ShutdownMode = Avalonia.Controls.ShutdownMode.OnMainWindowClose,
         };
 
-        this.appBuilder = AppBuilder.Configure<App>()
-            .UsePlatformDetect()
-            .WithInterFont()
+        this.appBuilder = ShellUiBuilder.Create(logger)
             .SetupWithLifetime(lifetime);
-
-        Avalonia.Logging.Logger.Sink = new LogSink(
-            logger, [], Microsoft.Extensions.Logging.LogLevel.Warning
-        );
 
         return Task.CompletedTask;
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-
-using AvaloniaIDE.Shell.State;
+using AvaloniaIDE.Shell.Abstractions;
+using AvaloniaIDE.Shell.States;
 
 namespace AvaloniaIDE.Shell;
 
