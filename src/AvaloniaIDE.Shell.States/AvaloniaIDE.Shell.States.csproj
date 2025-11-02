@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>AvaloniaIDE.Shell.States</AssemblyName>
+    <RootNamespace>AvaloniaIDE.Shell.States</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Settings.Configuration" />
+    <PackageReference Include="Serilog.Sinks.File" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AvaloniaIDE.Shell.Abstractions\AvaloniaIDE.Shell.Abstractions.csproj" />
+    <ProjectReference Include="..\AvaloniaIDE.Shell.Hosting\AvaloniaIDE.Shell.Hosting.csproj" />
+    <ProjectReference Include="..\AvaloniaIDE.Shell.UI\AvaloniaIDE.Shell.UI.csproj" />
+  </ItemGroup>
+
+</Project>

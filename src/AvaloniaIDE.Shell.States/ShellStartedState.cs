@@ -1,6 +1,5 @@
-using AvaloniaIDE.Shell.State;
-using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
+using AvaloniaIDE.Shell.Abstractions;
+using AvaloniaIDE.Shell.States.Logging;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
@@ -8,8 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 
-namespace AvaloniaIDE.Shell.UI;
+namespace AvaloniaIDE.Shell.States;
 
 internal sealed class ShellStartedState : ShellStateBase
 {
@@ -42,7 +43,7 @@ internal sealed class ShellStartedState : ShellStateBase
         {
              logger.LogAvaloniaStarting();
              if (app.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime lifetime)
-             result = lifetime.Start();
+                result = lifetime.Start();
              logger.LogAvaloniaStopped();
          }
 #pragma warning disable CA1031

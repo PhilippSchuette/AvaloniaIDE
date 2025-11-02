@@ -8,21 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <ProjectReference Include="..\AvaloniaIDE.Shell.States\AvaloniaIDE.Shell.States.csproj" />
+        <ProjectReference Include="..\AvaloniaIDE.Shell.Abstractions\AvaloniaIDE.Shell.Abstractions.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Serilog.Extensions.Hosting"/>
-        <PackageReference Include="Serilog.Settings.Configuration"/>
-        <PackageReference Include="Serilog.Sinks.File"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\AvaloniaIDE.Shell.State\AvaloniaIDE.Shell.State.csproj"/>
-        <ProjectReference Include="..\AvaloniaIDE.Shell.UI\AvaloniaIDE.Shell.UI.csproj"/>
-    </ItemGroup>
-
+    
     <ItemGroup>
         <Content Include="Configuration/shellsettings.json" CopyToOutputDirectory="PreserveNewest"/>
         <Content Condition="'$(Configuration)' == 'Debug'"

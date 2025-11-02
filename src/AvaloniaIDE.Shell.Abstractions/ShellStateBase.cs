@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace AvaloniaIDE.Shell.State;
+namespace AvaloniaIDE.Shell.Abstractions;
 
 public abstract class ShellStateBase : IShellState
 {

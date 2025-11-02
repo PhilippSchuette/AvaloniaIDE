@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace AvaloniaIDE.Shell.UI;
+namespace AvaloniaIDE.Shell.UI.Logging;
 
 internal sealed class LogSink : Avalonia.Logging.ILogSink
 {
